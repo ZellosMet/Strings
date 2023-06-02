@@ -1,5 +1,5 @@
-#include<iostream>
-#include <Windows.h> //Библиотека для подключения Windows библиотек
+п»ї#include<iostream>
+#include <Windows.h> //Р‘РёР±Р»РёРѕС‚РµРєР° РґР»СЏ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Windows Р±РёР±Р»РёРѕС‚РµРє
 using namespace std;
 
 int StringLength(const char *str);
@@ -7,19 +7,19 @@ int StringLength(const char *str);
 void main()
 {
 	//setlocale(LC_ALL, "ru");
-	SetConsoleCP(1251); //Выставление русской кодировки для ввод
-	SetConsoleOutputCP(1251); //Для вывода
+	SetConsoleCP(1251); //Р’С‹СЃС‚Р°РІР»РµРЅРёРµ СЂСѓСЃСЃРєРѕР№ РєРѕРґРёСЂРѕРІРєРё РґР»СЏ РІРІРѕРґ
+	SetConsoleOutputCP(1251); //Р”Р»СЏ РІС‹РІРѕРґР°
 
-	//Способы объявления строк
+	//РЎРїРѕСЃРѕР±С‹ РѕР±СЉСЏРІР»РµРЅРёСЏ СЃС‚СЂРѕРє
 	//char str[] = {'H', 'e', 'l', 'l', 'o', 0};
 	//char str[] = "Hello";
 	const int SIZE = 256;
 	char str[SIZE] = {};
-	cout << "Введите строку: "; 
+	cout << "Р’РІРµРґРёС‚Рµ СЃС‚СЂРѕРєСѓ: "; 
 	//cin >> str;
-	cin.getline(str, SIZE); //позволяет через cin вводить строки с пробелом и не позволяет выходить за пределы массива
+	cin.getline(str, SIZE); //РїРѕР·РІРѕР»СЏРµС‚ С‡РµСЂРµР· cin РІРІРѕРґРёС‚СЊ СЃС‚СЂРѕРєРё СЃ РїСЂРѕР±РµР»РѕРј Рё РЅРµ РїРѕР·РІРѕР»СЏРµС‚ РІС‹С…РѕРґРёС‚СЊ Р·Р° РїСЂРµРґРµР»С‹ РјР°СЃСЃРёРІР°
 	cout << str << endl;
-	cout << "Размер введённой строки: " << StringLength(str) << endl;
+	cout << "Р Р°Р·РјРµСЂ РІРІРµРґС‘РЅРЅРѕР№ СЃС‚СЂРѕРєРё: " << StringLength(str) << endl;
 }
 
 int StringLength(const char *str)
