@@ -24,7 +24,7 @@ void main()
 
 int StringLength(const char *str)
 {
-	int cnt=0;
-	while (str[cnt]!='\0') cnt++;
-	return cnt;
+	int i = 0;
+	for (; str[i]; i++);
+	return i;
 }
