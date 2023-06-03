@@ -34,15 +34,12 @@ void main()
 	//Способы инициализации строк
 	//char str[] = {'H', 'e', 'l', 'l', 'o', 0};
 	//char str[] = "Hello";
-
+	int num = 0;
 	const int SIZE = 256;
-	//char str[SIZE] = "лёша   на полке   клопа  нашёл"; 
-	//char str[SIZE] = "Хорошо        живет    на   свете      Винни";
-	char str[SIZE] = "123456789";
-
-	cout << str << endl;
-	//cout << "Введите строку: "; 
-	//cin.getline(str, SIZE); //Позволяет через cin вводить строки с пробелом и не позволяет выходить за пределы массива
+	char str[SIZE] = {};
+	//char str[SIZE] = "лёша   на полке   клопа  нашёл"; // проверка на полиндром
+	cout << "Введите строку: "; 
+	cin.getline(str, SIZE); //Позволяет через cin вводить строки с пробелом и не позволяет выходить за пределы массива строки
 	ToLower(str);
 	cout << str << endl;
 	ToUpper(str);
@@ -50,8 +47,7 @@ void main()
 	Shrink(str);
 	cout << str << endl;
 	(IsPalindrome(str)) ? cout << "Строка является полиндромом" << endl : cout << "Строка не является полиндромом" << endl;
-	(IsIntNumber(str)) ? cout << "Строка является числом" : cout << "Строка не является числом";
-
+	(IsIntNumber(str)) ? cout << "Строка является целым числом и вреобразована в целочисленный тип: " << (num = ToIntNumber((str))) : cout << "Строка не является числом";
 }
 
 int StringLength(const char *str)
@@ -143,8 +139,10 @@ bool IsIntNumber(const char* str)
 int ToIntNumber(char* str)
 {
 	int num = 0;
-	for (int i = 0; str[i] < 0; i++)
+	for (int i = 0; str[i] != 0; i++)
 	{
-		num = str[i] -= 48;
+		num *= 10;
+		num += str[i] - StartNum;
 	}
+	return num;
 }
