@@ -2,26 +2,13 @@
 #include <Windows.h> //Библиотека для подключения Windows библиотек
 using namespace std;
 
-#define StartUpWordRu -64
-#define EndUpWordRu -33
-#define StartLowWordRu -32
-#define EndLowWordRu -1
-#define UpERu -88
-#define LoweRu -72
-#define DifferenceE 16
-#define StartUpWordEng 65
-#define EndUpWordEng 90
-#define StartLowWordEng 97
-#define EndLowWordEng 122
-#define DifferenceWord 32
-#define Space 32
 #define StartNum 48
 #define EndNum 57
 
 int StringLength(const char *str); //Подсчёт символов в строке
-void ToLower(char *str); //Переводит строку в нижний регистр
-void ToUpper(char *str); //Переводит строку в вержний регистр
-void Shrink(char *str); //Удаляет лишние пробелы из строки
+char* ToLower(char *str); //Переводит строку в нижний регистр
+char* ToUpper(char *str); //Переводит строку в вержний регистр
+char* Shrink(char *str); //Удаляет лишние пробелы из строки
 bool IsPalindrome(const char *str); //Проверка на полиндром
 bool IsIntNumber(const char *str); //Проверка на целое число
 int ToIntNumber(char *str); //Возврат целого числа
@@ -36,16 +23,14 @@ void main()
 	//char str[] = "Hello";
 	int num = 0;
 	const int SIZE = 256;
-	char str[SIZE] = {};
+	//char str[SIZE] = "Аргентина    манит неграа!";
+	char str[SIZE] = "0123456789";	
 	//char str[SIZE] = "лёша   на полке   клопа  нашёл"; // проверка на полиндром
-	cout << "Введите строку: "; 
-	cin.getline(str, SIZE); //Позволяет через cin вводить строки с пробелом и не позволяет выходить за пределы массива строки
-	ToLower(str);
-	cout << str << endl;
-	ToUpper(str);
-	cout << str << endl;
-	Shrink(str);
-	cout << str << endl;
+	//cout << "Введите строку: "; 
+	//cin.getline(str, SIZE); //Позволяет через cin вводить строки с пробелом и не позволяет выходить за пределы массива строки
+	cout << ToLower(str) << endl;
+	cout << ToUpper(str) << endl;
+	cout << Shrink(str) << endl;
 	(IsPalindrome(str)) ? cout << "Строка является полиндромом" << endl : cout << "Строка не является полиндромом" << endl;
 	(IsIntNumber(str)) ? cout << "Строка является целым числом и вреобразована в целочисленный тип: " << (num = ToIntNumber((str))) : cout << "Строка не является числом";
 }
@@ -57,34 +42,38 @@ int StringLength(const char *str)
 	return i;
 }
 
-void ToLower(char *str)
+char* ToLower(char *str)
 {
 	for (int i = 0; str[i] != 0; i++)
 	{
-		if (str[i] >= StartUpWordRu && str[i] <= EndUpWordRu) str[i] += DifferenceWord;
-		if (str[i] == LoweRu) str[i] -= DifferenceE;
-		if (str[i] >= StartUpWordEng && str[i] <= EndUpWordEng) str[i] += DifferenceWord;
+		if (str[i] >= 'А' && str[i] <= 'Я') str[i] += 32;
+		if (str[i] == 'Ё') str[i] -= 16;
+		if (str[i] >= 'A' && str[i] <= 'Z') str[i] += 32;
 	}
+	return str;
 }
-void ToUpper(char *str)
+char* ToUpper(char *str)
 {
 	for (int i = 0; str[i] != 0; i++)
 	{
-		if (str[i] >= StartLowWordRu && str[i] <= EndLowWordRu) str[i] -= DifferenceWord;
-		if (str[i] == UpERu) str[i] += DifferenceE;
-		if (str[i] >= StartLowWordEng && str[i] <= EndLowWordEng) str[i] -= DifferenceWord;
+		if (str[i] >= 'а' && str[i] <= 'я') str[i] -= 32;
+		if (str[i] == 'ё') str[i] += 16;
+		if (str[i] >= 'a' && str[i] <= 'z') str[i] -= 32;
 	}
+	return str;
 }
-void Shrink(char *str)
+char* Shrink(char *str)
 {
 	for (int i = 0; str[i] != 0; i++)
 	{
-		if (str[i] == Space && str[i+1] == Space)
+		if (str[i] == ' ' && str[i + 1] == ' ')
 		{
 			for (int j = i; str[j] != 0; j++) str[j] = str[j + 1];
 			i--;
 		}
 	}
+	while (str[0] == ' ') for (int i = 0; str[i]; i++) str[i] = str[i + 1];
+	return str;
 }
 bool IsPalindrome(const char *str)
 {
@@ -93,12 +82,12 @@ bool IsPalindrome(const char *str)
 
 	for (int i = 0; str[i] != 0; i++)
 	{
-		if (str[i] >= StartLowWordRu && str[i] <= EndLowWordRu ||
-			str[i] >= StartLowWordEng && str[i] <= EndLowWordEng ||
-			str[i] >= StartUpWordRu && str[i] <= EndUpWordRu ||
-			str[i] >= StartUpWordEng && str[i] <= EndUpWordEng ||
-			str[i] >= StartNum && str[i] <= EndNum ||
-			str[i] == UpERu || str[i] == LoweRu) cnt++;
+		if (str[i] >= 'а' && str[i] <= 'я' ||
+			str[i] >= 'a' && str[i] <= 'z' ||
+			str[i] >= 'А' && str[i] <= 'Я' ||
+			str[i] >= 'A' && str[i] <= 'Z' ||
+			str[i] >= '0' && str[i] <= '9' ||
+			str[i] == 'Ё' || str[i] == 'ё') cnt++;
 	}
 
 	char *buff = new char[cnt+1]{};
@@ -106,12 +95,12 @@ bool IsPalindrome(const char *str)
 
 	for (int i = 0, j = 0; str[i] != 0; i++)
 	{
-		if (str[i] >= StartLowWordRu && str[i] <= EndLowWordRu ||
-			str[i] >= StartLowWordEng && str[i] <= EndLowWordEng ||
-			str[i] >= StartUpWordRu && str[i] <= EndUpWordRu ||
-			str[i] >= StartUpWordEng && str[i] <= EndUpWordEng ||
-			str[i] >= StartNum && str[i] <= EndNum ||
-			str[i] == UpERu || str[i] == LoweRu)
+		if (str[i] >= 'а' && str[i] <= 'я' ||
+			str[i] >= 'a' && str[i] <= 'z' ||
+			str[i] >= 'А' && str[i] <= 'Я' ||
+			str[i] >= 'A' && str[i] <= 'Z' ||
+			str[i] >= '0' && str[i] <= '9' ||
+			str[i] == 'Ё' || str[i] == 'ё')
 			{
 				buff[j] = str[i];
 				j++;
@@ -130,10 +119,8 @@ bool IsPalindrome(const char *str)
 }
 bool IsIntNumber(const char* str)
 {
-	for (int i = 0; str[i] != 0; i++)
-	{
-		if (str[i] < 0 || str[i] > EndNum) return false;	
-	}
+	for (int i = 0; str[i] != 0; i++) 
+		if (str[i] < 0 || str[i] > EndNum) return false;
 	return true;
 }
 int ToIntNumber(char* str)
