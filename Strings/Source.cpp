@@ -32,7 +32,7 @@ void main()
 	cout << ToUpper(str) << endl;
 	cout << Shrink(str) << endl;
 	(IsPalindrome(str)) ? cout << "Строка является полиндромом" << endl : cout << "Строка не является полиндромом" << endl;
-	(IsIntNumber(str)) ? cout << "Строка является целым числом и вреобразована в целочисленный тип: " << (num = ToIntNumber((str))) : cout << "Строка не является числом";
+	(IsIntNumber(str)) ? cout << "Строка является целым числом и преобразована в целочисленный тип: " << (num = ToIntNumber((str))) : cout << "Строка не является числом";
 }
 
 int StringLength(const char *str)
@@ -120,7 +120,7 @@ bool IsPalindrome(const char *str)
 bool IsIntNumber(const char* str)
 {
 	for (int i = 0; str[i] != 0; i++) 
-		if (str[i] < 0 || str[i] > EndNum) return false;
+		if (str[i] < '0' || str[i] > '9') return false;
 	return true;
 }
 int ToIntNumber(char* str)
@@ -129,7 +129,7 @@ int ToIntNumber(char* str)
 	for (int i = 0; str[i] != 0; i++)
 	{
 		num *= 10;
-		num += str[i] - StartNum;
+		num += str[i] - '0';
 	}
 	return num;
 }
