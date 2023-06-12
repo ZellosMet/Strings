@@ -173,7 +173,7 @@ bool IsHexNumber(const char* str)
 }
 long long ToHexNumber(char* str)
 {
-	int num = 0;
+	long long num = 0;
 	for (int i = StringLength(str) - 1, j = 0; i >= 0; i--, j++)
 	{
 		if (str[i] < '0' || str[i] > '9') num += ((str[i] - 55) * Degree(16, j));
