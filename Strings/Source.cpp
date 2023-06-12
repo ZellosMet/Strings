@@ -11,9 +11,9 @@ bool IsPalindrome(const char *str); //Проверка на полиндром
 bool IsIntNumber(const char *str); //Проверка на целое число
 int ToIntNumber(char *str); //Возврат целого числа
 bool IsBinNumber(const char *str); // Проверят на двоичное число 
-long long ToBinNumber(char *str); // Переводит двоичное в десятичное
+long long ToBinNumber(const char *str); // Переводит двоичное в десятичное
 bool IsHexNumber(const char *str); // Проверят на шестнацеричное число число 
-long long ToHexNumber(char *str); // Переводит шестнацеричное в десятичное
+long long ToHexNumber(const char *str); // Переводит шестнацеричное в десятичное
 int Degree(int base, int deg); // Возведение в степень
 
 void main()
@@ -153,7 +153,7 @@ bool IsBinNumber(const char *str)
 		if (str[i] < '0' || str[i] > '1') return false;
 	return true;
 }
-long long ToBinNumber(char *str)
+long long ToBinNumber(const char *str)
 {
 	long long num = 0;
 	for (int i = StringLength(str)-1, j=0; i>=0; i--, j++) if (str[i]=='1') num += Degree(2, j);
@@ -171,7 +171,7 @@ bool IsHexNumber(const char* str)
 	delete buff;
 	return true;
 }
-long long ToHexNumber(char* str)
+long long ToHexNumber(const char* str)
 {
 	long long num = 0;
 	for (int i = StringLength(str) - 1, j = 0; i >= 0; i--, j++)
