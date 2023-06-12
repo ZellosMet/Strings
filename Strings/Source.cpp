@@ -9,7 +9,7 @@ char* ToUpper(char *str); //Переводит строку в вержний р
 char* Shrink(char *str); //Удаляет лишние пробелы из строки
 bool IsPalindrome(const char *str); //Проверка на полиндром
 bool IsIntNumber(const char *str); //Проверка на целое число
-int ToIntNumber(char *str); //Возврат целого числа
+int ToIntNumber(const char *str); //Возврат целого числа
 bool IsBinNumber(const char *str); // Проверят на двоичное число 
 long long ToBinNumber(const char *str); // Переводит двоичное в десятичное
 bool IsHexNumber(const char *str); // Проверят на шестнацеричное число число 
@@ -130,7 +130,7 @@ bool IsIntNumber(const char* str)
 		if (str[i] < '0' || str[i] > '9') return false;
 	return true;
 }
-int ToIntNumber(char* str)
+int ToIntNumber(const char* str)
 {
 	int num = 0;
 	for (int i = 0; str[i]; i++)
