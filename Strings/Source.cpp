@@ -13,7 +13,7 @@ int ToIntNumber(char *str); //Возврат целого числа
 bool IsBinNumber(const char *str); // Проверят на двоичное число 
 int ToBinNumber(char *str); // Переводит двоичное в десятичное
 bool IsHexNumber(const char *str); // Проверят на шестнацеричное число число 
-int ToHexNumber(char *str); // Переводит шестнацеричное в десятичное
+long long ToHexNumber(char *str); // Переводит шестнацеричное в десятичное
 int Degree(int base, int deg); // Возведение в степень
 
 void main()
@@ -24,7 +24,7 @@ void main()
 	//Способы инициализации строк
 	//char str[] = {'H', 'e', 'l', 'l', 'o', 0};
 	//char str[] = "Hello";
-	int num = 0;
+	long long num = 0;
 	const int SIZE = 256;
 	char str[SIZE];
 	//char str[SIZE] = "E8F"; //29
@@ -171,7 +171,7 @@ bool IsHexNumber(const char* str)
 	delete buff;
 	return true;
 }
-int ToHexNumber(char* str)
+long long ToHexNumber(char* str)
 {
 	int num = 0;
 	for (int i = StringLength(str) - 1, j = 0; i >= 0; i--, j++)
